@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/termfolio/static/css/main.080c75cc.css",
+    "main.js": "/termfolio/static/js/main.ba6ce610.js",
+    "static/js/453.61a19a53.chunk.js": "/termfolio/static/js/453.61a19a53.chunk.js",
+    "static/media/background.png": "/termfolio/static/media/background.b0e59fa0ba58246be184.png",
+    "index.html": "/termfolio/index.html",
+    "main.080c75cc.css.map": "/termfolio/static/css/main.080c75cc.css.map",
+    "main.ba6ce610.js.map": "/termfolio/static/js/main.ba6ce610.js.map",
+    "453.61a19a53.chunk.js.map": "/termfolio/static/js/453.61a19a53.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.080c75cc.css",
+    "static/js/main.ba6ce610.js"
+  ]
+}
