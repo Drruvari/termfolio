@@ -3,10 +3,10 @@ import CommandInput from "./CommandInput";
 import HistoryEntry from "./HistoryEntry";
 import WindowControls from "./WindowControls";
 import CurrentTime from "./CurrentTime";
+import CommandLogic from "./CommandLogic";
 import backgroundImage from "../assets/background.png";
+import InitialLoad from "./InitialLoad";
 import { useCurrentTime } from "../hooks/useCurrentTime";
-import { useCommandLogic } from "../hooks/useCommandLogic";
-import { useInitialLoad } from "../hooks/useInitialLoad";
 
 interface TerminalWindowProps {
 	initialPrompt: string;
@@ -23,8 +23,8 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ initialPrompt }) => {
 		handleKeyPress,
 		showPlaceholder,
 		setShowPlaceholder,
-	} = useCommandLogic(initialPrompt);
-	useInitialLoad(setHistory, initialPrompt);
+	} = CommandLogic(initialPrompt);
+	InitialLoad(setHistory, initialPrompt);
 
 	return (
 		<div
@@ -38,7 +38,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ initialPrompt }) => {
 		>
 			<div className="backdrop-filter backdrop-blur-sm w-full h-full absolute" />
 
-			<div className="w-full max-w-4xl bg-gray-800 bg-opacity-80 text-gray-200 font-mono text-sm rounded-lg border border-gray-700 sm:max-w-xl md:max-w-2xl lg:max-w-4xl relative">
+			<div className="w-full max-w-4xl bg-gray-800 bg-opacity-80 text-gray-200 font-mono text-sm rounded-lg border border-gray-700 sm:max-w-xl md:max-w-4xl lg:max-w-7xl relative">
 				<WindowControls />
 				<CurrentTime currentTime={currentTime} />
 				<div className="overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent max-h-[calc(100vh-8rem)]">

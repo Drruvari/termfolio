@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import Welcome from "./commands/Welcome";
 
-export const useInitialLoad = (setHistory: Function, initialPrompt: string) => {
+const useInitialLoad = (setHistory: Function, initialPrompt: string) => {
 	const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
 
 	useEffect(() => {
@@ -9,9 +10,7 @@ export const useInitialLoad = (setHistory: Function, initialPrompt: string) => {
 				{
 					prompt: initialPrompt,
 					input: "",
-					output:
-						"Welcome to drruvari's termfolio. Type 'help' for available commands.",
-					className: "font-fascinate text-xl font-bold uppercase",
+					output: <Welcome />,
 				},
 			]);
 			setIsFirstLoad(false);
@@ -20,3 +19,5 @@ export const useInitialLoad = (setHistory: Function, initialPrompt: string) => {
 
 	return { isFirstLoad };
 };
+
+export default useInitialLoad;

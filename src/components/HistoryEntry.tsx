@@ -5,7 +5,6 @@ interface HistoryEntryProps {
 		prompt: string;
 		input: string;
 		output: string | React.ReactNode;
-		className?: string;
 	};
 }
 
@@ -16,7 +15,7 @@ const HistoryEntry: React.FC<HistoryEntryProps> = ({ entry }) => {
 				<span className="text-purple-400">{entry.prompt}</span>
 				<span> {entry.input}</span>
 			</div>
-			<div className={`mb-2 ${entry.className}`}>
+			<div className="mb-2">
 				{typeof entry.output === "string" ? entry.output : entry.output}
 			</div>
 		</div>

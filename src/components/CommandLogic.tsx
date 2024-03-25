@@ -1,6 +1,11 @@
 import { useState, useCallback, useMemo } from "react";
+import Skills from "../components/commands/Skills";
+import Bio from "../components/commands/Bio";
+import Help from "../components/commands/Help";
+import Error from "../components/commands/Error";
+import Welcome from "../components/commands/Welcome";
 
-type CommandFunction = () => string;
+type CommandFunction = () => string | React.ReactNode;
 
 interface Commands {
 	[key: string]: CommandFunction;
@@ -12,7 +17,7 @@ interface CommandHistoryEntry {
 	output: string | React.ReactNode;
 }
 
-export const useCommandLogic = (initialPrompt: string) => {
+const useCommandLogic = (initialPrompt: string) => {
 	const [input, setInput] = useState<string>("");
 	const [history, setHistory] = useState<CommandHistoryEntry[]>([]);
 	const [prompt, setPrompt] = useState<string>(initialPrompt);
@@ -20,29 +25,32 @@ export const useCommandLogic = (initialPrompt: string) => {
 
 	const commands: Commands = useMemo(
 		() => ({
-			help: () => "Available commands: clear, help, bio, skills",
+			help: () => <Help />,
+			whoami: () => {
+				setPrompt(`${initialPrompt}/whoami`);
+				return <Bio />;
+			},
+			skills: () => {
+				setPrompt(`${initialPrompt}/skills`);
+				return <Skills />;
+			},
 			clear: () => {
 				setTimeout(() => setHistory([]), 0);
 				return "";
 			},
-			bio: () => {
-				setPrompt(`${initialPrompt}/bio`);
-				return "Displaying Bio...";
-			},
-			skills: () => {
-				setPrompt(`${initialPrompt}/skills`);
-				return "Displaying Skills...";
+			banner: () => {
+				return <Welcome />;
 			},
 		}),
 		[initialPrompt, setHistory, setPrompt]
 	);
 
-	const executeCommand = useCallback(
-		(command: string): string => {
+	const executeCommand: (command: string) => React.ReactNode = useCallback(
+		(command: string) => {
 			if (commands[command]) {
 				return commands[command]();
 			}
-			return "Command not found. Try 'help' for available commands.";
+			return <Error />;
 		},
 		[commands]
 	);
@@ -50,11 +58,26 @@ export const useCommandLogic = (initialPrompt: string) => {
 	const handleKeyPress = useCallback(
 		(event: React.KeyboardEvent<HTMLInputElement>): void => {
 			if (event.key === "Enter") {
-				const output: string = executeCommand(input);
+				const output: React.ReactNode = executeCommand(input);
 				setHistory([...history, { prompt, input, output }]);
 				setInput("");
 				if (!commands[input]) {
 					setPrompt(initialPrompt);
+				}
+			}
+			if (event.key === "Escape") {
+				setInput("");
+				setShowPlaceholder(true);
+				setPrompt(initialPrompt);
+			}
+			if (event.key === "Tab") {
+				event.preventDefault();
+				const suggestions = Object.keys(commands).filter((command) =>
+					command.startsWith(input)
+				);
+				if (suggestions.length > 0) {
+					setInput(suggestions[0]);
+					setShowPlaceholder(false);
 				}
 			}
 		},
@@ -72,3 +95,5 @@ export const useCommandLogic = (initialPrompt: string) => {
 		setShowPlaceholder,
 	};
 };
+
+export default useCommandLogic;
