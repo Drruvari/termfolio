@@ -39,7 +39,7 @@ const CommandInput: React.FC<CommandInputProps> = ({
 						htmlFor="commandInput"
 						className="cursor-text text-gray-500 text-opacity-50 animate-pulse"
 					>
-						try help, skills, bio
+						try help, skills, whoami
 					</label>
 				)}
 			</div>

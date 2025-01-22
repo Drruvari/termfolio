@@ -9,9 +9,8 @@ interface SkillCategory {
 const skillCategories: SkillCategory[] = [
 	{
 		category: "Programming Languages",
-		skills: ["TypeScript", "JavaScript", "Python"],
+		skills: ["TypeScript", "JavaScript", "Tailwind CSS", "React", "Next.js"],
 	},
-	// Add more categories and skills as needed
 ];
 
 const Skills: React.FC = () => {

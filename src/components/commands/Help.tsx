@@ -5,6 +5,8 @@ const commands = [
 	{ command: "whoami", description: "about Kejdi" },
 	{ command: "skills", description: "display my skills" },
 	{ command: "clear", description: "clear command history" },
+  { command: "banner", description: "display the terminal banner" },
+  { command: "github", description: "visit my github profile" },
 ];
 
 const Help: React.FC = () => {

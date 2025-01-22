@@ -10,13 +10,13 @@ const Welcome: React.FC = () => {
 			transition={{ duration: 0.8 }}
 			className="text-xl uppercase"
 		>
-			Welcome to drruvari's termfolio. Type
+			Welcome to kejdi's termfolio. Type
 			<span className="text-lime-500"> 'help' </span>
 			for available commands.
 			<div className="mt-4 text-sm normal-case">
 				<Help />
 			</div>
-			<div className="text-lime-600 mt-4">
+			<div className="text-purple-600 mt-4">
 				<p>
 					<pre>
 						███████╗██╗&nbsp;&nbsp;██╗███████╗██╗&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;██╗
